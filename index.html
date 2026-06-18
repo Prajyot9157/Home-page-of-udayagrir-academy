@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UDAYAGIRI ACADEMY | Empowering Future Achievers</title>
+    <meta name="description" content="Shape Your Future With UDAYAGIRI ACADEMY. Expert Guidance, Academic Excellence, and Better Results.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Configuration for Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#FF4FA3',
+                        secondary: '#7B2EFF',
+                        dark: '#0B0F19',
+                        light: '#F8FAFC',
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Glassmorphism */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0F19; /* Dark premium background */
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #FF4FA3, #7B2EFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, #FF4FA3, #7B2EFF);
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card {
+            background: rgba(20, 25, 40, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(123, 46, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px 0 rgba(123, 46, 255, 0.2);
+            border-color: rgba(255, 79, 163, 0.3);
+        }
+
+        /* Hero Slider */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 8s linear;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.05);
+            z-index: 0;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(11, 15, 25, 0.9) 0%, rgba(11, 15, 25, 0.6) 100%);
+            z-index: 1;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7B2EFF;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF4FA3;
+        }
+
+        /* Button Shine Effect */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255,255,255,0.3);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+        .btn-shine:hover::after {
+            left: 120%;
+        }
+
+        /* Lightbox styling */
+        #lightbox {
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white">
+
+    <!-- PRELOADER -->
+    <div id="preloader" class="fixed inset-0 z-[9999] bg-gradient-custom flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="relative flex flex-col items-center justify-center">
+            <!-- Animated rings behind logo -->
+            <div class="absolute inset-0 rounded-full border-4 border-white/20 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+            <div class="absolute inset-0 rounded-full border-4 border-white/40 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite] delay-150"></div>
+            
+            <div class="w-32 h-32 md:w-48 md:h-48 bg-white rounded-full p-2 flex items-center justify-center shadow-2xl z-10 animate-[scale-up_1s_ease-out]">
+                <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781399677/file_0000000016d0720b90d59b1433db483e_hhq2p2.png" alt="Udayagiri Academy Logo" class="w-full h-full object-contain rounded-full">
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center opacity-0 animate-[fade-in_1s_ease-out_0.5s_forwards]">
+            <h1 class="text-3xl md:text-5xl font-heading font-bold text-white tracking-wider mb-2">UDAYAGIRI ACADEMY</h1>
+            <p class="text-white/90 text-lg md:text-xl font-medium tracking-wide">Empowering Future Achievers</p>
+        </div>
+    </div>
+
+    <!-- REDIRECT TRANSITION OVERLAY -->
+    <div id="redirect-overlay" class="fixed inset-0 z-[99999] bg-gradient-custom flex flex-col items-center justify-center transition-opacity duration-700 opacity-0 pointer-events-none">
+        <div class="relative flex flex-col items-center justify-center">
+            <!-- Animated rings behind logo -->
+            <div class="absolute inset-0 rounded-full border-4 border-white/20 animate-[ping_1.5s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+            
+            <div class="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full p-2 flex items-center justify-center shadow-2xl z-10 animate-pulse">
+                <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781399677/file_0000000016d0720b90d59b1433db483e_hhq2p2.png" alt="Udayagiri Academy Logo" class="w-full h-full object-contain rounded-full">
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center">
+            <h2 class="text-2xl md:text-4xl font-heading font-bold text-white tracking-wider mb-2 animate-bounce">Redirecting...</h2>
+            <p class="text-white/90 text-sm md:text-base font-medium tracking-wide">Taking you to Studiment</p>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVBAR -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="glass mx-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                        <div class="w-12 h-12 bg-white rounded-full p-1 shadow-lg">
+                            <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781399677/file_0000000016d0720b90d59b1433db483e_hhq2p2.png" alt="Logo" class="w-full h-full object-contain rounded-full">
+                        </div>
+                        <span class="font-heading font-bold text-xl md:text-2xl tracking-wide text-white">
+                            UDAYAGIRI
+                        </span>
+                    </div>
+                    
+                    <!-- Desktop Menu -->
+                    <nav class="hidden md:block">
+                        <ul class="flex space-x-8 items-center">
+                            <li><a href="#home" class="text-gray-300 hover:text-white transition-colors text-sm font-medium uppercase tracking-wider">Home</a></li>
+                            <li><a href="#features" class="text-gray-300 hover:text-white transition-colors text-sm font-medium uppercase tracking-wider">Features</a></li>
+                            <li><a href="#gallery" class="text-gray-300 hover:text-white transition-colors text-sm font-medium uppercase tracking-wider">Gallery</a></li>
+                            <li><a href="#app" class="text-gray-300 hover:text-white transition-colors text-sm font-medium uppercase tracking-wider">App</a></li>
+                            <li>
+                                <a href="#contact" class="bg-white/10 hover:bg-white/20 border border-white/20 px-6 py-2.5 rounded-full text-white font-medium transition-all backdrop-blur-md">
+                                    Contact Us
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-dark/95 backdrop-blur-xl absolute w-full">
+                <ul class="px-4 pt-2 pb-6 space-y-2 text-center">
+                    <li><a href="#home" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-lg mobile-link">Home</a></li>
+                    <li><a href="#features" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-lg mobile-link">Features</a></li>
+                    <li><a href="#gallery" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-lg mobile-link">Gallery</a></li>
+                    <li><a href="#app" class="block px-3 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 rounded-lg mobile-link">Download App</a></li>
+                    <li><a href="#contact" class="block px-3 py-3 mt-4 text-base font-medium text-white bg-gradient-custom rounded-lg mobile-link">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Slideshow -->
+        <div id="hero-slider" class="absolute inset-0 z-0">
+            <div class="hero-slide active" style="background-image: url('https://res.cloudinary.com/dygxni81n/image/upload/v1781786099/20260618_180426_nmmwko.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('https://res.cloudinary.com/dygxni81n/image/upload/v1781786098/20260618_175051_jqmpzn.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('https://res.cloudinary.com/dygxni81n/image/upload/v1781786099/20260618_180228_lfltwf.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('https://res.cloudinary.com/dygxni81n/image/upload/v1781786168/20260618_180527_ke3mlb.jpg');"></div>
+        </div>
+        
+        <div class="hero-overlay"></div>
+
+        <!-- Animated Floating Blobs -->
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/30 rounded-full mix-blend-screen filter blur-[80px] animate-blob z-10"></div>
+        <div class="absolute top-1/3 right-1/4 w-72 h-72 bg-secondary/30 rounded-full mix-blend-screen filter blur-[80px] animate-blob animation-delay-2000 z-10"></div>
+        <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-500/30 rounded-full mix-blend-screen filter blur-[80px] animate-blob animation-delay-4000 z-10"></div>
+
+        <!-- Content -->
+        <div class="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full pt-20">
+            <span class="inline-block py-1 px-3 rounded-full glass text-sm font-medium text-pink-300 mb-6 tracking-wider uppercase border border-pink-500/30 shadow-[0_0_15px_rgba(255,79,163,0.3)]">
+                Welcome to Excellence
+            </span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-white leading-tight mb-6 drop-shadow-2xl">
+                Shape Your Future With <br class="hidden md:block"/>
+                <span class="text-gradient">UDAYAGIRI ACADEMY</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-md">
+                Expert Guidance &bull; Academic Excellence &bull; Better Results
+            </p>
+            
+            <div class="mt-10 flex flex-col sm:flex-row flex-wrap gap-5 justify-center items-center">
+                <!-- Trigger Redirect Animation Button -->
+                <a href="#" onclick="triggerRedirectTransition(event, 'https://studiment.live')" class="btn-shine w-full sm:w-auto px-8 py-4 bg-gradient-custom rounded-full text-white font-semibold text-lg shadow-[0_0_20px_rgba(123,46,255,0.4)] hover:shadow-[0_0_30px_rgba(255,79,163,0.6)] transition-all transform hover:-translate-y-1 text-center">
+                    Get Started <i class="fas fa-external-link-alt ml-2"></i>
+                </a>
+                <a href="#features" class="w-full sm:w-auto px-8 py-4 glass rounded-full text-white font-semibold text-lg hover:bg-white/10 transition-all border border-white/20 text-center">
+                    Explore Features
+                </a>
+                <a href="#app" class="w-full sm:w-auto px-8 py-4 bg-gray-900/80 backdrop-blur-md rounded-full text-white font-semibold text-lg hover:bg-gray-800 transition-all border border-[#3DDC84]/50 shadow-[0_0_15px_rgba(61,220,132,0.2)] text-center flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                    <i class="fab fa-android text-[#3DDC84] text-xl"></i> Download App
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <a href="#features" class="text-white/50 hover:text-white transition-colors">
+                <i class="fas fa-chevron-down text-3xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="py-24 bg-dark relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Our Pillars of Success</h2>
+                <h3 class="text-4xl md:text-5xl font-heading font-bold text-white mb-6">Why Choose <span class="text-gradient">Udayagiri</span>?</h3>
+                <p class="text-gray-400 text-lg">We provide a comprehensive learning environment designed to bring out the best in every student through personalized attention and proven methodologies.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-card rounded-3xl p-8 reveal">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-custom p-0.5 mb-6 shadow-lg shadow-pink-500/20 transform -rotate-3 group-hover:rotate-0 transition-transform">
+                        <div class="w-full h-full bg-dark rounded-xl flex items-center justify-center">
+                            <i class="fas fa-chalkboard-teacher text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-white mb-3">Expert Faculty</h4>
+                    <p class="text-gray-400 leading-relaxed">Highly experienced and passionate teachers dedicated to student success and conceptual clarity.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card rounded-3xl p-8 reveal" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-custom p-0.5 mb-6 shadow-lg shadow-purple-500/20 transform rotate-3 group-hover:rotate-0 transition-transform">
+                        <div class="w-full h-full bg-dark rounded-xl flex items-center justify-center">
+                            <i class="fas fa-bullseye text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-white mb-3">Result Oriented</h4>
+                    <p class="text-gray-400 leading-relaxed">Structured preparation strategies focused on maximizing scores in board and competitive exams.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card rounded-3xl p-8 reveal" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-custom p-0.5 mb-6 shadow-lg shadow-pink-500/20 transform -rotate-3 group-hover:rotate-0 transition-transform">
+                        <div class="w-full h-full bg-dark rounded-xl flex items-center justify-center">
+                            <i class="fas fa-file-signature text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-white mb-3">Weekly Tests</h4>
+                    <p class="text-gray-400 leading-relaxed">Regular assessments to track progress with detailed performance analytics and feedback.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card rounded-3xl p-8 reveal" style="transition-delay: 300ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-custom p-0.5 mb-6 shadow-lg shadow-purple-500/20 transform rotate-3 group-hover:rotate-0 transition-transform">
+                        <div class="w-full h-full bg-dark rounded-xl flex items-center justify-center">
+                            <i class="fas fa-user-graduate text-2xl text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-heading font-bold text-white mb-3">Personal Mentorship</h4>
+                    <p class="text-gray-400 leading-relaxed">Individual attention, doubt-clearing sessions, and career guidance for every student.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="py-24 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-secondary font-semibold tracking-wide uppercase text-sm mb-2">Life at Institute</h2>
+                <h3 class="text-4xl md:text-5xl font-heading font-bold text-white mb-6">Our <span class="text-gradient">Gallery</span></h3>
+                <p class="text-gray-400 text-lg">Glimpses of our vibrant learning environment, dedicated students, and interactive classroom sessions.</p>
+            </div>
+
+            <!-- Masonry Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+                <!-- Image 1 -->
+                <div class="group relative overflow-hidden rounded-3xl aspect-video cursor-pointer border border-white/10 shadow-lg" onclick="openLightbox('https://res.cloudinary.com/dygxni81n/image/upload/v1781786099/20260618_180426_nmmwko.jpg')">
+                    <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781786099/20260618_180426_nmmwko.jpg" alt="Classroom Session" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <div class="bg-white/20 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center text-white">
+                            <i class="fas fa-search-plus text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 2 -->
+                <div class="group relative overflow-hidden rounded-3xl aspect-video cursor-pointer border border-white/10 shadow-lg" onclick="openLightbox('https://res.cloudinary.com/dygxni81n/image/upload/v1781786098/20260618_175051_jqmpzn.jpg')">
+                    <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781786098/20260618_175051_jqmpzn.jpg" alt="Student Interaction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <div class="bg-white/20 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center text-white">
+                            <i class="fas fa-search-plus text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 3 -->
+                <div class="group relative overflow-hidden rounded-3xl aspect-video cursor-pointer border border-white/10 shadow-lg" onclick="openLightbox('https://res.cloudinary.com/dygxni81n/image/upload/v1781786099/20260618_180228_lfltwf.jpg')">
+                    <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781786099/20260618_180228_lfltwf.jpg" alt="Study Materials" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <div class="bg-white/20 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center text-white">
+                            <i class="fas fa-search-plus text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 4 -->
+                <div class="group relative overflow-hidden rounded-3xl aspect-video cursor-pointer border border-white/10 shadow-lg" onclick="openLightbox('https://res.cloudinary.com/dygxni81n/image/upload/v1781786168/20260618_180527_ke3mlb.jpg')">
+                    <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781786168/20260618_180527_ke3mlb.jpg" alt="Campus View" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <div class="bg-white/20 backdrop-blur-md rounded-full w-12 h-12 flex items-center justify-center text-white">
+                            <i class="fas fa-search-plus text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 hidden items-center justify-center opacity-0 transition-opacity duration-300">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full w-12 h-12 flex items-center justify-center transition-colors z-50">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Gallery Preview" class="max-w-[90%] max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- APP DOWNLOAD SECTION -->
+    <section id="app" class="py-24 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-b from-dark via-gray-900 to-dark z-0"></div>
+        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary/10 rounded-full mix-blend-screen filter blur-[120px] z-0"></div>
+        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full mix-blend-screen filter blur-[120px] z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-card rounded-[3rem] p-8 md:p-16 border border-white/10 relative overflow-hidden">
+                <!-- Inner glow -->
+                <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-purple-500/10 pointer-events-none"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    
+                    <!-- Mobile View: Phone on Top -->
+                    <div class="order-1 lg:order-2 flex justify-center relative reveal">
+                        <!-- Floating Particles around phone -->
+                        <div class="absolute top-10 left-10 w-4 h-4 bg-primary rounded-full animate-float shadow-[0_0_10px_#FF4FA3]"></div>
+                        <div class="absolute bottom-20 right-10 w-6 h-6 bg-secondary rounded-full animate-float animation-delay-2000 shadow-[0_0_15px_#7B2EFF]"></div>
+                        <div class="absolute top-1/2 -left-4 w-3 h-3 bg-white rounded-full animate-pulse shadow-[0_0_8px_#FFF]"></div>
+
+                        <!-- Phone Mockup Container -->
+                        <div class="relative w-[280px] sm:w-[320px] h-[580px] sm:h-[650px] rounded-[3rem] border-[8px] border-gray-900 bg-gray-950 shadow-2xl shadow-purple-500/30 overflow-hidden animate-float z-10">
+                            <!-- Notch -->
+                            <div class="absolute top-0 inset-x-0 h-7 bg-gray-900 rounded-b-3xl w-[40%] mx-auto z-30"></div>
+                            
+                            <!-- Screen Inner -->
+                            <div class="relative w-full h-full bg-dark overflow-hidden flex flex-col">
+                                <!-- Mock App Header -->
+                                <div class="bg-gradient-custom p-6 pt-10 rounded-b-3xl shadow-lg relative z-20">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-8 h-8 bg-white rounded-full p-0.5">
+                                                <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781399677/file_0000000016d0720b90d59b1433db483e_hhq2p2.png" alt="Logo" class="w-full h-full object-contain rounded-full">
+                                            </div>
+                                            <span class="text-white font-bold text-sm">Hi, Student 👋</span>
+                                        </div>
+                                        <i class="fas fa-bell text-white"></i>
+                                    </div>
+                                    <div class="bg-white/20 rounded-xl p-3 backdrop-blur-sm border border-white/30">
+                                        <p class="text-xs text-white/80">New Study Material</p>
+                                        <p class="text-sm font-bold text-white">Physics - Thermodynamics</p>
+                                        <p class="text-xs text-white/90 mt-1"><i class="fas fa-file-pdf mr-1"></i> Added today</p>
+                                    </div>
+                                </div>
+                                <!-- Mock App Body -->
+                                <div class="p-4 flex-1 relative z-10">
+                                    <h4 class="text-white text-sm font-bold mb-3">Quick Access</h4>
+                                    <div class="grid grid-cols-2 gap-3 mb-4">
+                                        <div class="bg-gray-800 rounded-xl p-3 border border-gray-700 flex flex-col items-center justify-center gap-2">
+                                            <div class="w-10 h-10 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center"><i class="fas fa-edit"></i></div>
+                                            <span class="text-xs text-gray-300">Assignments</span>
+                                        </div>
+                                        <div class="bg-gray-800 rounded-xl p-3 border border-gray-700 flex flex-col items-center justify-center gap-2">
+                                            <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center"><i class="fas fa-file-alt"></i></div>
+                                            <span class="text-xs text-gray-300">Notes & PYQs</span>
+                                        </div>
+                                        <div class="bg-gray-800 rounded-xl p-3 border border-gray-700 flex flex-col items-center justify-center gap-2">
+                                            <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center"><i class="fas fa-tasks"></i></div>
+                                            <span class="text-xs text-gray-300">Mock Tests</span>
+                                        </div>
+                                        <div class="bg-gray-800 rounded-xl p-3 border border-gray-700 flex flex-col items-center justify-center gap-2">
+                                            <div class="w-10 h-10 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center"><i class="fas fa-chart-line"></i></div>
+                                            <span class="text-xs text-gray-300">Analytics</span>
+                                        </div>
+                                    </div>
+                                    <!-- Background abstract image to fill space -->
+                                    <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781786099/20260618_180228_lfltwf.jpg" class="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-overlay -z-10" alt="bg">
+                                </div>
+                                <!-- Mock App Bottom Nav -->
+                                <div class="bg-gray-900 border-t border-gray-800 p-4 flex justify-around text-gray-500 relative z-20">
+                                    <i class="fas fa-home text-primary"></i>
+                                    <i class="fas fa-book"></i>
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desktop View: Content on Left -->
+                    <div class="order-2 lg:order-1 reveal">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium mb-6">
+                            <span class="flex h-2 w-2 relative">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                            </span>
+                            <span class="text-gray-300">🚀 Experience The Academy Anywhere</span>
+                        </div>
+                        
+                        <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
+                            📱 Study Anywhere, <span class="text-gradient">Anytime</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                            Access comprehensive notes, mock tests, assignments, and advanced progress tracking directly from your phone. Your entire classroom, completely digitized.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary"><i class="fas fa-check text-sm"></i></div>
+                                <span class="text-gray-300 font-medium">Assignments & Homework</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary"><i class="fas fa-check text-sm"></i></div>
+                                <span class="text-gray-300 font-medium">Study Notes & PYQs</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary"><i class="fas fa-check text-sm"></i></div>
+                                <span class="text-gray-300 font-medium">Practice Tests</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary"><i class="fas fa-check text-sm"></i></div>
+                                <span class="text-gray-300 font-medium">Performance Analytics</span>
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-500 mb-4 font-medium tracking-wide uppercase">Download the Official App</p>
+                        
+                        <div class="flex flex-wrap gap-4">
+                            <!-- Direct APK Download Button -->
+                            <a href="#" onclick="showToast('APK Download will be available soon!')" class="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-[#3DDC84] to-[#2E8B57] text-white rounded-xl transition-all font-medium transform hover:-translate-y-1 shadow-lg shadow-[#3DDC84]/20">
+                                <i class="fab fa-android text-2xl"></i>
+                                <div class="text-left">
+                                    <div class="text-[10px] leading-none text-white/80 font-bold uppercase mb-0.5">Direct Download</div>
+                                    <div class="text-sm font-bold leading-none">Download APK</div>
+                                </div>
+                            </a>
+
+                            <!-- App Store Button (Placeholder) -->
+                            <button onclick="showToast('Coming soon to the App Store!')" class="flex items-center gap-3 px-6 py-3 bg-dark border border-gray-700 hover:border-gray-500 text-white rounded-xl transition-all font-medium transform hover:-translate-y-1 shadow-lg shadow-black/50">
+                                <i class="fab fa-apple text-2xl"></i>
+                                <div class="text-left">
+                                    <div class="text-[10px] leading-none text-gray-400 font-bold uppercase mb-0.5">Coming soon on</div>
+                                    <div class="text-sm font-bold leading-none">App Store</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="py-24 bg-dark relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Student Stories</h2>
+                <h3 class="text-4xl md:text-5xl font-heading font-bold text-white mb-6">What Our <span class="text-gradient">Achievers</span> Say</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card rounded-3xl p-8 reveal">
+                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic relative before:content-['\201C'] before:text-4xl before:text-primary/30 before:absolute before:-top-4 before:-left-2 before:font-serif">
+                        "The personal mentorship at Udayagiri Academy completely changed my approach to studying. The concepts were made so easy to understand, and the regular tests helped me identify my weak areas."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-custom p-0.5">
+                            <div class="w-full h-full bg-gray-800 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold font-heading">Aryan Sharma</h5>
+                            <p class="text-gray-500 text-sm">State Board Topper</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card rounded-3xl p-8 reveal" style="transition-delay: 100ms;">
+                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic relative before:content-['\201C'] before:text-4xl before:text-primary/30 before:absolute before:-top-4 before:-left-2 before:font-serif">
+                        "I joined for competitive exam preparation. The study material and the expertise of the faculty are unmatched. They don't just teach; they make sure you actually learn."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-custom p-0.5">
+                            <div class="w-full h-full bg-gray-800 rounded-full flex items-center justify-center text-white font-bold">P</div>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold font-heading">Priya Patel</h5>
+                            <p class="text-gray-500 text-sm">JEE Aspirant</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-card rounded-3xl p-8 reveal" style="transition-delay: 200ms;">
+                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic relative before:content-['\201C'] before:text-4xl before:text-primary/30 before:absolute before:-top-4 before:-left-2 before:font-serif">
+                        "The environment here is very competitive yet supportive. The doubt-clearing sessions are a game-changer. Highly recommended for anyone serious about their academic future."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-custom p-0.5">
+                            <div class="w-full h-full bg-gray-800 rounded-full flex items-center justify-center text-white font-bold">R</div>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold font-heading">Rohan Desai</h5>
+                            <p class="text-gray-500 text-sm">NEET Aspirant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-24 relative overflow-hidden bg-gray-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-card rounded-[2.5rem] overflow-hidden shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    
+                    <!-- Contact Info (Left) -->
+                    <div class="bg-gradient-custom p-10 md:p-16 text-white relative overflow-hidden">
+                        <!-- BG pattern -->
+                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+                        
+                        <div class="relative z-10">
+                            <h3 class="text-3xl md:text-4xl font-heading font-bold mb-4">Get In Touch</h3>
+                            <p class="text-white/80 mb-10 leading-relaxed text-lg">Have questions about our batches, fees, or curriculum? Drop us a message or reach out directly.</p>
+                            
+                            <div class="space-y-8">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-phone-alt text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/70 text-sm uppercase tracking-wide font-medium mb-1">Call Us Directly</p>
+                                        <a href="tel:8766534074" class="text-xl font-bold hover:text-white/80 transition-colors">+91 87665 34074</a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                                        <i class="fab fa-whatsapp text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/70 text-sm uppercase tracking-wide font-medium mb-1">WhatsApp</p>
+                                        <a href="https://wa.me/918766534074" target="_blank" class="text-xl font-bold hover:text-white/80 transition-colors">Chat with us</a>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white/70 text-sm uppercase tracking-wide font-medium mb-1">Visit Academy</p>
+                                        <!-- MAP LINK INTEGRATED HERE -->
+                                        <a href="https://maps.app.goo.gl/qpAbxz5CoANJH6A19" target="_blank" class="text-lg font-medium hover:text-white/80 transition-colors block">
+                                            Udayagiri Academy, Main Campus, Pune, Maharashtra, India
+                                        </a>
+                                        <a href="https://maps.app.goo.gl/qpAbxz5CoANJH6A19" target="_blank" class="text-sm font-bold text-white hover:text-gray-200 transition-colors mt-1 inline-block">
+                                            <i class="fas fa-external-link-alt mr-1"></i> Open in Maps
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form (Right) -->
+                    <div class="p-10 md:p-16 bg-dark/60 backdrop-blur-xl">
+                        <h4 class="text-2xl font-heading font-bold text-white mb-6">Send an Inquiry</h4>
+                        <form id="contactForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+                                    <input type="text" required class="w-full bg-gray-800/50 border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-500" placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Phone Number</label>
+                                    <input type="tel" required class="w-full bg-gray-800/50 border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-500" placeholder="+91 XXXXX XXXXX">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Class / Course Interested In</label>
+                                <select required class="w-full bg-gray-800/50 border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none">
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="school">State Board / CBSE (8th - 10th)</option>
+                                    <option value="science">11th & 12th Science</option>
+                                    <option value="commerce">11th & 12th Commerce</option>
+                                    <option value="jee">JEE / NEET Prep</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                <textarea required rows="4" class="w-full bg-gray-800/50 border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-500 resize-none" placeholder="How can we help you?"></textarea>
+                            </div>
+                            <button type="submit" class="btn-shine w-full py-4 bg-gradient-custom text-white font-bold rounded-xl shadow-lg hover:shadow-pink-500/25 transition-all transform hover:-translate-y-1">
+                                Submit Inquiry
+                            </button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#050810] pt-20 pb-10 border-t border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-white rounded-full p-1">
+                            <img src="https://res.cloudinary.com/dygxni81n/image/upload/v1781399677/file_0000000016d0720b90d59b1433db483e_hhq2p2.png" alt="Logo" class="w-full h-full object-contain rounded-full">
+                        </div>
+                        <span class="font-heading font-bold text-2xl tracking-wide text-white">
+                            UDAYAGIRI <span class="text-gradient">ACADEMY</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed max-w-sm mb-6">Empowering students with knowledge, confidence, and the right strategy to crack board and competitive exams successfully.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary/50 transition-all"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary/50 transition-all"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary/50 transition-all"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-300 hover:text-white hover:bg-primary/50 transition-all"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h5 class="text-white font-heading font-bold mb-6 uppercase tracking-wider text-sm">Quick Links</h5>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#home" class="hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="#features" class="hover:text-primary transition-colors">About Us</a></li>
+                        <li><a href="#gallery" class="hover:text-primary transition-colors">Gallery</a></li>
+                        <li><a href="#app" class="hover:text-primary transition-colors">Download App</a></li>
+                        <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Short -->
+                <div>
+                    <h5 class="text-white font-heading font-bold mb-6 uppercase tracking-wider text-sm">Contact Info</h5>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-primary"></i>
+                            <!-- MAP LINK INTEGRATED HERE -->
+                            <a href="https://maps.app.goo.gl/qpAbxz5CoANJH6A19" target="_blank" class="hover:text-white transition-colors">
+                                Udayagiri Academy, Education Hub, Pune, MH
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone-alt text-primary"></i>
+                            <a href="tel:8766534074" class="hover:text-white transition-colors">87665 34074</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <a href="mailto:info@udayagiriacademy.com" class="hover:text-white transition-colors">info@udayagiriacademy.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>&copy; 2026 Udayagiri Academy. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/918766534074" target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center text-3xl shadow-lg shadow-[#25D366]/40 hover:scale-110 transition-transform animate-bounce">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-white text-dark px-6 py-3 rounded-full shadow-2xl font-medium transition-all duration-300 translate-y-10 opacity-0 z-[100] flex items-center gap-3 pointer-events-none">
+        <i class="fas fa-info-circle text-primary"></i>
+        <span id="toast-msg">Notification</span>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. PRELOADER LOGIC
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => preloader.style.display = 'none', 1000);
+            }, 2500); // 2.5 seconds delay as requested
+        });
+
+        // 2. REDIRECT TRANSITION ANIMATION LOGIC
+        function triggerRedirectTransition(e, url) {
+            e.preventDefault();
+            const overlay = document.getElementById('redirect-overlay');
+            
+            // Show overlay by removing opacity-0 and pointer-events-none
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            overlay.classList.add('opacity-100', 'pointer-events-auto');
+            
+            // Redirect after 1.5 seconds so the user can see the full animation
+            setTimeout(() => {
+                window.location.href = url;
+            }, 1500);
+        }
+
+        // 3. HERO SLIDESHOW
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 4000); // Auto change every 4 seconds
+
+        // 4. SCROLL REVEAL ANIMATIONS
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Unobserve after revealing to animate only once
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 5. NAVBAR SCROLL EFFECT
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'bg-dark/80');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-dark/80');
+            }
+        });
+
+        // 6. MOBILE MENU TOGGLE
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if(mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // 7. LIGHTBOX LOGIC FOR GALLERY
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(imgSrc) {
+            lightboxImg.src = imgSrc;
+            lightbox.classList.remove('hidden');
+            // Small delay to allow display block to apply before transition
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close lightbox on clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // 8. FORM SUBMISSION & TOAST NOTIFICATION
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            
+            // Simulate API Call
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                e.target.reset();
+                showToast("Inquiry submitted successfully! We will contact you soon.");
+            }, 1500);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            
+            toast.classList.remove('translate-y-10', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+            }, 3000);
+        }
+
+    </script>
+</body>
+</html>
